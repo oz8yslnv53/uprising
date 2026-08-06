@@ -1,0 +1,22 @@
+name: decomp.dev report
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate objdiff report
+        run: |
+          python3 scripts/generate_decomp_report.py \
+            --output build/report.json
+      - name: Upload decomp.dev report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jp_rev1_report
+          path: build/report.json
