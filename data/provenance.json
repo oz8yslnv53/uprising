@@ -1,6 +1,9 @@
 {
-  "catalog_commit": "0e39569d4fa0dffb993b126e8326ca2b432640ee",
+  "catalog_commit": "9dc82fd7364fc6ad284799d8ab45e4c9a30a2c83",
   "catalog_path": "notes/catalog.tsv",
+  "private_function_rows": 5929,
+  "private_unique_function_addresses": 5928,
+  "public_function_total": 24890,
   "score_profile": "score_armcc41_nintendo",
   "source": "private kiu-c catalog",
   "unmapped_private_functions": 176
