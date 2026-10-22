@@ -3328,7 +3328,7 @@ address	name	kind	size	src_file	match_score
 00258fc4	StateResource_CopyTableEntryIfActive_00258FC4	FUNCTION	20	-	-
 00258fd8	ResourceState_SetClampedValue_00258FD8	FUNCTION	28	-	-
 00258ff8	Engine_GlobalStateFinalize_00258FF8	FUNCTION	292	-	-
-00259128	ResourceEffect_UpdateValues_00259128	FUNCTION	192	-	13.6
+00259128	NnSnd_Dspsnd_SetChannelMix_00259128	FUNCTION	192	-	13.6
 002591ec	GlobalState_UpdateProgressBuffers_002591EC	FUNCTION	256	-	-
 002592f4	GlobalState_SubmitProgress_002592F4	FUNCTION	152	-	-
 00259394	GlobalState_FinalizeDeviceContext_00259394	FUNCTION	120	-	-
