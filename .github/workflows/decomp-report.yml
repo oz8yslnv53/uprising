@@ -15,6 +15,8 @@ jobs:
         run: |
           python3 scripts/generate_decomp_report.py \
             --output build/report.json
+      - name: Validate report measures
+        run: python3 scripts/validate_decomp_report.py --report build/report.json
       - name: Upload ByteMatch report
         uses: actions/upload-artifact@v4
         with:
