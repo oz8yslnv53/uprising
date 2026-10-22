@@ -7,7 +7,9 @@ Public research archive for the Japanese Rev 1 release of *Kid Icarus: Uprising*
 
 ## Scope and status
 
-`src/`, `include/` and any other commit data are a frozen proof of concept from approximately two months before this archive was published. They document how the matching work was *initially* approached and validate the source links recorded in the catalog; they are not maintained, expanded, or presented as current reconstruction work. A lot of it overuses casts, there's no proper data structures, there's direct offsetting and other bad practices that do not make for a final, correct work.
+`src/`, `include/` and any other committed data are a frozen proof of concept from approximately two months before this archive was published. They document how the matching work was *initially* approached and validate the source links recorded in the catalog; they are not maintained, expanded, or presented as current reconstruction work. A lot of it overuses casts, lacks proper data structures, uses direct offsets, and has other practices that do not make for final, correct work.
+
+The repository deliberately contains no game executable, ROM, extracted assets, object files, SDK, or compiler. The sole exception is the Nintendo 3DS application icon in `assets/icon.png`, included only as the ByteMatch project icon. Obtain any other game material lawfully and keep it outside this checkout.
 
 ***Public updates are limited to the inventories, research information, and objdiff/ByteMatch reporting support.*** In particular, do not treat a source file's presence as a promise of a reproducible build or a current match.
 
@@ -16,6 +18,9 @@ Public research archive for the Japanese Rev 1 release of *Kid Icarus: Uprising*
 - `data/functions.tsv` — JP Rev 1 function inventory: address, name, size,
   optional archived source path, and recorded match score.
 - `data/data.tsv` — defined-data inventory: address, size, type, and label.
+- `data/provenance.json` — committed private catalog revision and score profile
+  used for the current public score export.
+- `assets/icon.png` — 512px project icon extracted from the JP Rev 1 SMDH.
 - `src/`, `include/` — frozen historical reconstruction snapshot.
 - `scripts/generate_decomp_report.py` — creates the objdiff-compatible report
   used by ByteMatch.
@@ -27,7 +32,13 @@ original executable.
 
 ## Progress report
 
-The report is generated from a private repository.
+The report is generated from a private repository. Its scores are exported
+from the latest committed private `score_armcc41_nintendo` ledger; the exact
+source revision and profile are in `data/provenance.json`. They do not
+establish that the frozen public sources can currently be built or byte-matched.
+
+On every push, GitHub Actions generates the public report and uploads it as
+`jp_rev1_report`. ByteMatch reads that artifact for the public project page.
 
 ## Credits
 
