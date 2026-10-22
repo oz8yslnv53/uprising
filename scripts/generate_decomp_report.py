@@ -7,9 +7,6 @@ import json
 from pathlib import Path
 
 
-TEXT_UNIT_SIZE = 0x100000
-
-
 def load_rows(path):
     with path.open(newline="") as handle:
         return list(csv.DictReader(handle, delimiter="\t"))
@@ -54,9 +51,13 @@ def report_item(row):
     }
 
 
-def unit_name(address):
-    start = address // TEXT_UNIT_SIZE * TEXT_UNIT_SIZE
-    return f"jp_rev1/text/{start:08x}-{start + TEXT_UNIT_SIZE - 1:08x}"
+def load_units(path):
+    with path.open(newline="") as handle:
+        rows = csv.DictReader(handle, delimiter="\t")
+        expected = ("address", "unit")
+        if tuple(rows.fieldnames or ()) != expected:
+            raise ValueError(f"unexpected unit map schema: {path}")
+        return {row["address"].lower(): row["unit"] for row in rows}
 
 
 def progress_for_items(items, total_data=0, complete_code=0, total_units=1):
@@ -72,8 +73,9 @@ def progress_for_items(items, total_data=0, complete_code=0, total_units=1):
     )
 
 
-def build_report(catalog_path, data_path):
+def build_report(catalog_path, data_path, units_path):
     rows = load_rows(catalog_path)
+    unit_map = load_units(units_path)
     data_size = (sum(int(row["size"]) for row in load_rows(data_path))
                  if data_path.exists() else 0)
     unit_items = {}
@@ -82,7 +84,7 @@ def build_report(catalog_path, data_path):
         if row["kind"] == "DATA":
             continue
         address = int(row["address"], 16)
-        name = unit_name(address)
+        name = "jp_rev1/" + unit_map.get(f"{address:08x}", "unknown")
         unit_items.setdefault(name, []).append(report_item(row))
         if row["src_file"] not in ("", "-"):
             unit_complete_code[name] = unit_complete_code.get(name, 0) + int(row["size"])
@@ -122,11 +124,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--catalog", type=Path, default=Path("data/functions.tsv"))
     parser.add_argument("--data", type=Path, default=Path("data/data.tsv"))
+    parser.add_argument("--units", type=Path, default=Path("data/function_units.tsv"))
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(
-        build_report(args.catalog, args.data), indent=2
+        build_report(args.catalog, args.data, args.units), indent=2
     ) + "\n")
 
 

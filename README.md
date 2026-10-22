@@ -39,10 +39,10 @@ source revision and profile are in `data/provenance.json`. They do not
 establish that the frozen public sources can currently be built or byte-matched.
 
 On every push, GitHub Actions generates the public report and uploads it as
-`jp_rev1_report`. It groups functions into stable 1 MiB text-address units;
-this makes the map navigable without claiming that the frozen source tree
-builds separate object files. ByteMatch reads that artifact for the public
-project page.
+`jp_rev1_report`. It groups functions by their current private-tree subsystem
+metadata (for example `camera`, `render`, and `runtime`); functions with no
+known subsystem remain in `unknown`. ByteMatch reads that artifact for the
+public project page.
 
 ## Credits
 
