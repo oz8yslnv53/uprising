@@ -42,7 +42,8 @@ On every push, GitHub Actions generates the public report and uploads it as
 `jp_rev1_report`. It groups functions by their current private-tree subsystem
 metadata (for example `camera`, `render`, and `runtime`); functions with no
 known subsystem remain in `unknown`. ByteMatch reads that artifact for the
-public project page.
+public project page. No public unit is marked fully linked: this archive does
+not publish a buildable reconstruction.
 
 ## Credits
 

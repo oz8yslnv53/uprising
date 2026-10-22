@@ -79,23 +79,18 @@ def build_report(catalog_path, data_path, units_path):
     data_size = (sum(int(row["size"]) for row in load_rows(data_path))
                  if data_path.exists() else 0)
     unit_items = {}
-    unit_complete_code = {}
     for row in rows:
         if row["kind"] == "DATA":
             continue
         address = int(row["address"], 16)
         name = "jp_rev1/" + unit_map.get(f"{address:08x}", "unknown")
         unit_items.setdefault(name, []).append(report_item(row))
-        if row["src_file"] not in ("", "-"):
-            unit_complete_code[name] = unit_complete_code.get(name, 0) + int(row["size"])
 
     units = []
     for name, items in sorted(unit_items.items()):
         unit = {
             "name": name,
-            "measures": progress_for_items(
-                items, complete_code=unit_complete_code.get(name, 0),
-            ),
+            "measures": progress_for_items(items),
             "functions": items,
             "metadata": {
                 "complete": False,
@@ -106,7 +101,7 @@ def build_report(catalog_path, data_path, units_path):
 
     progress = progress_for_items(
         [item for items in unit_items.values() for item in items], data_size,
-        sum(unit_complete_code.values()), total_units=len(units),
+        total_units=len(units),
     )
     return {
         "measures": progress,
