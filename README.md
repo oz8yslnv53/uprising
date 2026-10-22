@@ -7,7 +7,7 @@ Public research archive for the Japanese Rev 1 release of *Kid Icarus: Uprising*
 
 ## Scope and status
 
-`src/`, `include/` and any other commit data are a frozen proof of concept from approximately two months before this archive was published. They document how the matching work was *initially* approached and validate the source links recorded in the catalog; they are not maintained, expanded, or presented as current reconstruction work.
+`src/`, `include/` and any other commit data are a frozen proof of concept from approximately two months before this archive was published. They document how the matching work was *initially* approached and validate the source links recorded in the catalog; they are not maintained, expanded, or presented as current reconstruction work. A lot of it overuses casts, there's no proper data structures, there's direct offsetting and other bad practices that do not make for a final, correct work.
 
 ***Public updates are limited to the inventories, research information, and objdiff/ByteMatch reporting support.*** In particular, do not treat a source file's presence as a promise of a reproducible build or a current match.
 
