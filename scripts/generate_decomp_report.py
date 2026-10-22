@@ -7,6 +7,9 @@ import json
 from pathlib import Path
 
 
+TEXT_UNIT_SIZE = 0x100000
+
+
 def load_rows(path):
     with path.open(newline="") as handle:
         return list(csv.DictReader(handle, delimiter="\t"))
@@ -39,55 +42,73 @@ def measures(total_code, matched_code, fuzzy_code, total_functions,
     }
 
 
+def report_item(row):
+    address = int(row["address"], 16)
+    score = (float(row["match_score"])
+             if row["match_score"] not in ("", "-") else 0.0)
+    return {
+        "name": row["name"],
+        "size": int(row["size"]),
+        "fuzzy_match_percent": score,
+        "metadata": {"virtual_address": address},
+    }
+
+
+def unit_name(address):
+    start = address // TEXT_UNIT_SIZE * TEXT_UNIT_SIZE
+    return f"jp_rev1/text/{start:08x}-{start + TEXT_UNIT_SIZE - 1:08x}"
+
+
+def progress_for_items(items, total_data=0, complete_code=0, total_units=1):
+    total_code = sum(item["size"] for item in items)
+    matched_items = [item for item in items
+                     if item["fuzzy_match_percent"] == 100.0]
+    matched_code = sum(item["size"] for item in matched_items)
+    fuzzy_code = sum(item["size"] * item["fuzzy_match_percent"] / 100.0
+                     for item in items)
+    return measures(
+        total_code, matched_code, fuzzy_code, len(items), len(matched_items),
+        complete_code, total_data, total_units=total_units,
+    )
+
+
 def build_report(catalog_path, data_path):
     rows = load_rows(catalog_path)
-    items = []
     data_size = (sum(int(row["size"]) for row in load_rows(data_path))
                  if data_path.exists() else 0)
-    total_code = matched_code = fuzzy_code = 0
-    matched_functions = 0
-    complete_code = 0
+    unit_items = {}
+    unit_complete_code = {}
     for row in rows:
-        address = row["address"].lower()
-        size = int(row["size"])
         if row["kind"] == "DATA":
             continue
-        score = (float(row["match_score"])
-                 if row["match_score"] not in ("", "-") else 0.0)
-        total_code += size
-        fuzzy_code += size * score / 100.0
-        if score == 100.0:
-            matched_code += size
-            matched_functions += 1
+        address = int(row["address"], 16)
+        name = unit_name(address)
+        unit_items.setdefault(name, []).append(report_item(row))
         if row["src_file"] not in ("", "-"):
-            complete_code += size
-        items.append({
-            "name": row["name"],
-            "size": size,
-            "fuzzy_match_percent": score,
-            "metadata": {"virtual_address": int(address, 16)},
-        })
-    progress = measures(
-        total_code, matched_code, fuzzy_code, len(items),
-        matched_functions, complete_code, data_size,
+            unit_complete_code[name] = unit_complete_code.get(name, 0) + int(row["size"])
+
+    units = []
+    for name, items in sorted(unit_items.items()):
+        unit = {
+            "name": name,
+            "measures": progress_for_items(
+                items, complete_code=unit_complete_code.get(name, 0),
+            ),
+            "functions": items,
+            "metadata": {
+                "complete": False,
+                "progress_categories": ["game"],
+            },
+        }
+        units.append(unit)
+
+    progress = progress_for_items(
+        [item for items in unit_items.values() for item in items], data_size,
+        sum(unit_complete_code.values()), total_units=len(units),
     )
-    unit = {
-        "name": "jp_rev1/code",
-        "measures": progress,
-        "functions": items,
-        "sections": [{
-            "name": "Ghidra data labels",
-            "size": data_size,
-            "fuzzy_match_percent": 0.0,
-        }],
-        "metadata": {
-            "complete": False,
-            "progress_categories": ["game"],
-        },
-    }
     return {
         "measures": progress,
-        "units": [unit],
+        "units": units,
         "version": 2,
         "categories": [{
             "id": "game",
