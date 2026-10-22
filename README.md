@@ -9,7 +9,7 @@ Public research archive for the Japanese Rev 1 release of *Kid Icarus: Uprising*
 
 `src/`, `include/` and any other committed data are a frozen proof of concept from approximately two months before this archive was published. They document how the matching work was *initially* approached and validate the source links recorded in the catalog; they are not maintained, expanded, or presented as current reconstruction work. A lot of it overuses casts, lacks proper data structures, uses direct offsets, and has other practices that do not make for final, correct work.
 
-The repository deliberately contains no game executable, ROM, extracted assets, object files, SDK, or compiler. The sole exception is the Nintendo 3DS application icon in `assets/icon.png`, included only as the ByteMatch project icon. Obtain any other game material lawfully and keep it outside this checkout.
+The repository deliberately contains no game executable, ROM, extracted assets, object files, SDK, or compiler. The sole exceptions are the Nintendo 3DS application icon and project banner in `assets/`, included only for the ByteMatch project page. Obtain any other game material lawfully and keep it outside this checkout.
 
 ***Public updates are limited to the inventories, research information, and objdiff/ByteMatch reporting support.*** In particular, do not treat a source file's presence as a promise of a reproducible build or a current match.
 
@@ -21,6 +21,7 @@ The repository deliberately contains no game executable, ROM, extracted assets, 
 - `data/provenance.json` — committed private catalog revision and score profile
   used for the current public score export.
 - `assets/icon.png` — 512px project icon extracted from the JP Rev 1 SMDH.
+- `assets/banner.jpg` — 1600×800 project banner for ByteMatch.
 - `src/`, `include/` — frozen historical reconstruction snapshot.
 - `scripts/generate_decomp_report.py` — creates the objdiff-compatible report
   used by ByteMatch.
