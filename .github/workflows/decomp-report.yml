@@ -1,4 +1,4 @@
-name: decomp.dev report
+name: ByteMatch report
 
 on:
   push:
@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Generate objdiff report
+      - name: Generate objdiff-compatible report
         run: |
           python3 scripts/generate_decomp_report.py \
             --output build/report.json
-      - name: Upload decomp.dev report
+      - name: Upload ByteMatch report
         uses: actions/upload-artifact@v4
         with:
           name: jp_rev1_report

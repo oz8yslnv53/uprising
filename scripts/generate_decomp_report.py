@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate an objdiff-compatible decomp.dev progress report."""
+"""Generate an objdiff-compatible ByteMatch progress report."""
 
 import argparse
 import csv
