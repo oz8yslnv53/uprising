@@ -3534,7 +3534,7 @@ address	name	kind	size	src_file	match_score
 00277a1c	MenuAlterEquipChangeBgParam_ResourceFactory_00277A1C	FUNCTION	108	-	47.7
 00277aac	MenuEquip02ButtonActionParam_ResourceFactory_00277AAC	FUNCTION	108	-	50.0
 00277b38	MenuEquip02BottomSingleClickButtonParam_ResourceFactory_00277B38	FUNCTION	108	-	52.5
-00277bc4	Engine_Routine_00277BC4	FUNCTION	1416	-	10.9
+00277bc4	Engine_Routine_00277BC4	FUNCTION	1416	-	36.6
 00278174	MenuGeneralDialog_UpdateOptionVisibility_00278174	FUNCTION	496	-	75.1
 0027837c	ResourceState_Reset_0027837C	FUNCTION	216	-	74.1
 00278468	ResourceState_ApplyMode_00278468	FUNCTION	924	-	2.9
