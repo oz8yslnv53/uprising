@@ -378,6 +378,7 @@ address	name	unit	match_score
 00146a40	StGimmickIdle::Destructor_00146A40	src/runtime	33.1
 00146ab0	AnimeCommandAvatarShot_UnlinkRecord_00146AB0	src/anime_command	41.4
 0014a9b0	AnimeCommandChannel_Unlink_0014A9B0	src/anime_command	47.1
+0014ae10	RegistryClass_UnlinkRecord_0014AE10	src/runtime	41.0
 0014b698	StGimmickSuspend::Destructor_0014B698	src/runtime	33.1
 0014b708	Engine_SelfLinkTripleInit_0014B708	src/unknown	100.0
 0014b718	Engine_SelfLinkPairInit_0014B718	src/runtime	42.5
@@ -2660,6 +2661,7 @@ address	name	unit	match_score
 0073c568	AnimeCommandEndFade_ReleaseEntry_0073C568	src/anime_command	60.0
 0073c7f8	FUN_0073C7F8	src/unknown	38.4
 0073d1a0	FUN_0073D1A0	src/unknown	38.4
+0073d280	NameOfSE_Release_0073D280	src/runtime	48.0
 0073e244	PlayHitSE_Release_0073E244	src/runtime	-
 0073ead4	AnimeCommandStartFade_ReleaseEntry_0073EAD4	src/anime_command	60.0
 0073ecb0	AnimeCommandWaitFrameWork_Release_0073ECB0	src/anime_command	29.9
@@ -4045,8 +4047,9 @@ address	name	unit	match_score
 00ae2f7c	FUN_00ae2f7c	unknown	-
 00ae32dc	AnimeCommandEndFade_Create_00AE32DC	src/anime_command	-
 00ae3464	AnimeCommandEndFade_GetList_00AE3464	src/anime_command	77.3
+00ae6994	NameOfSE_Create_00AE6994	src/runtime	60.8
 00ae6b60	AnimeCommand_NameOfSE_ClassDataSingleton_00AE6B60	src/audio	77.9
-00ae6be4	AnimeCommand_NameOfSE_LinkRecord_00AE6BE4	src/audio	86.2
+00ae6be4	AnimeCommand_NameOfSE_LinkRecord_00AE6BE4	src/audio	99.4
 00ae6c04	anime_command::NameOfSE::Allocate_00AE6C04	src/audio	57.2
 00ae6c9c	Audio_NameOfSEWork_Copy_00AE6C9C	src/audio	29.1
 00ae6e58	Audio_NameOfSEWork_ClassDataSingleton_00AE6E58	src/audio	53.3
