@@ -1,10 +1,10 @@
 {
-  "catalog_commit": "f9e23bbe13cec48e64fd0e83ec7fd3ea7e29b9ec",
-  "catalog_path": "notes/catalog.tsv",
-  "private_function_rows": 5929,
-  "private_unique_function_addresses": 5928,
+  "catalog_commit": "b04acc2a9b42b685b71942eeb9ff930b8613ecf3",
+  "catalog_path": "notes/catalog-functions.csv",
+  "private_function_rows": 30834,
+  "private_unique_function_addresses": 30834,
   "public_function_total": 24890,
   "score_profile": "score_armcc41_nintendo",
   "source": "private kiu-c catalog",
-  "unmapped_private_functions": 176
+  "unmapped_private_functions": 5957
 }
